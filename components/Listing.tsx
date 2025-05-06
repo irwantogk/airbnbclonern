@@ -4,6 +4,7 @@ import { defaultStyle } from '@/constants/Style';
 import { Link } from 'expo-router';
 import { IListing } from '@/interfaces/listing';
 import { Ionicons } from '@expo/vector-icons';
+import Animated, { FadeInLeft, FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 
 interface Props {
   listing: any[];
@@ -27,7 +28,7 @@ export default function Listing({ listing: items, category}: Props) {
     // classic problem if we use component inside link expo router (content not appear), should make as child by use asChild
     <Link href={`/listing/${item.id}`} asChild>
       <TouchableOpacity>
-        <View style={styles.listing}>
+        <Animated.View style={styles.listing} entering={FadeInRight} exiting={FadeOutLeft}>
           <Image source={{uri: item.medium_url}} style={styles.image} />
           <TouchableOpacity style={{position: "absolute", right: 30, top: 30}}>
             <Ionicons name="heart-outline" size={24} color={"#000"} />
@@ -48,7 +49,7 @@ export default function Listing({ listing: items, category}: Props) {
             <Text style={{fontFamily: "mon"}}>/</Text>
             <Text style={{fontFamily: "mon"}}>night</Text>
           </View>
-        </View>
+        </Animated.View>
       </TouchableOpacity>
     </Link>
   )
